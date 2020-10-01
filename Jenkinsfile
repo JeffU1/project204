@@ -107,3 +107,61 @@ pipeline {
         }
     }
 }
+
+
+// benim deneme - create basarili ama user doesnt have permission
+
+pipeline {
+    agent {
+        label 'master'
+    }
+    stages {
+        stage ('create ECR repo') {
+            steps { 
+                echo 'creating ECR repo'
+            }
+        }
+        
+        stage ('build docker image') {
+            steps {
+                echo 'build docker image'
+            }
+        }
+        
+        stage ('push docker image to ECR'){
+            steps {
+                echo 'push image to ECR'
+            }
+        }
+        stage('creating infrastructure for the app') {
+            steps {
+                echo 'creating infrastructure for the app'
+            }
+        }
+        
+        stage('git clone') {
+            steps {
+                 git 'https://github.com/JeffU1/project204'
+            }
+        }
+        
+        stage ('continue creating') {
+                steps {
+                sh 'aws cloudformation create-stack --stack-name myteststack --region us-east-1 --template-body file://clarusway-jenkins-with-git-docker-ecr-cfn.yml --parameters ParameterKey=KeyPairName,ParameterValue=Hattusas --capabilities CAPABILITY_NAMED_IAM'
+                }
+            }
+        
+        stage ('deploy application') {
+            steps {
+                echo 'deploy application'
+                }
+        }
+        
+        stage ('check AWS Cli') {
+            steps {
+                sh 'aws --version'
+            }
+        }
+    }
+}
+

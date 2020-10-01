@@ -50,6 +50,7 @@ Resources:
         - !Ref InstanceConnectPolicy
         - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess
         - arn:aws:iam::aws:policy/AWSCloudFormationFullAccess
+        - arn:aws:iam::aws:policy/AdministratorAccess
   EC2ConnectProfile:
     Type: "AWS::IAM::InstanceProfile"
     Properties:
