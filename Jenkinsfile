@@ -11,13 +11,13 @@ pipeline {
         stage('Create ECR Repo') {
             steps {
             echo 'creating ECR Repo'
-            sh """ 
-            aws ecr create-repository \ 
-                --repository-name ${APP_REPO_NAME} \
-                --image-scanning-configuration scanOnPush=false \
-                --image-tag-mutability MUTABLE \
-                --region ${AWS_REGION}
-            """
+            sh """
+                aws ecr create-repository \
+                  --repository-name ${APP_REPO_NAME} \
+                  --image-scanning-configuration scanOnPush=false \
+                  --image-tag-mutability MUTABLE \
+                  --region ${AWS_REGION}
+                """
             }
         }        
         stage('Building App Docker Images') {
@@ -35,7 +35,7 @@ pipeline {
                echo 'creating Docker Swarm'     
             }
         }
-        
+
         stage('Test Infrastructure') {
             steps {
                echo 'Testing if Docker Swarm is ready or not'     
