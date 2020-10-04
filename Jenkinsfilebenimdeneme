@@ -31,7 +31,7 @@ pipeline {
                 echo 'pushing Docker image to ECR Repo'
                 sh aws ecr get-login-password --region ${AWS::Region} | docker login --username AWS --password-stdin ${ECR_REGISTRY}
                 // sh 'aws ecr get-login-password ... '
-                sh docker push "${ECR_REGISTRY}/${APP_NAME}:latest" 
+                sh docker push "${ECR_REGISTRY}/${APP__REPO_NAME}:latest" 
                 // sh 'docker push ... '
             }
         }
