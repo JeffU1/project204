@@ -20,9 +20,11 @@ pipeline {
                 """
             }
         }        
-        stage('Building App Docker Images') {
+        stage('Building App Docker Image') {
             steps {
-               echo 'Building app Docker images'     
+               echo 'Building app Docker image'     
+               sh 'docker build --force-rm -t "${ECR_REGISTRY}/${APP_REPO_NAME}:latest" .'
+               sh 'docker image ls'  
             }
         }
         stage('Push App Docker Images to ECR Repo') {
