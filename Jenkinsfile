@@ -42,9 +42,8 @@ pipeline {
         }
         stage('Create Infrastructure for the App') {
             steps {
-               echo 'creating Docker Swarm'
-               sh 'aws cloudformation create-stack --region ${AWS_REGION} --stack-name ${AWS_STACK_NAME} --capabilities CAPABILITY_IAM --template-body file://phonebook-cfn-template.yml --parameters ParameterKey=KeyPairName,ParameterValue=${CFN_KEYPAIR}'     
-            
+               echo 'creating Docker Swarm'     
+               sh 'aws cloudformation create-stack --region ${AWS_REGION} --stack-name ${AWS_STACK_NAME} --capabilities CAPABILITY_IAM --template-body file://phonebook-cfn-template.yml --parameters ParameterKey=KeyPairName,ParameterValue=${CFN_KEYPAIR}'
                script {
                     while(true){
                         echo "Docker Grand Master is not UP and running yet. Will try to reach again after 10 seconds"
